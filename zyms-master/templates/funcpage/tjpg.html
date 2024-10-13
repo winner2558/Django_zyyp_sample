@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>统计分析</title>
+	<!-- css&js -->
+	<link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="/static/css/style.css" />
+	<link rel="stylesheet" href="/static/css/print.css" media="print" />
+	<script src="/static/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/static/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+	<style>
+		@keyframes fade {
+			50% {
+				color: red;
+				transform: scale(1.03);
+			}
+		}
+
+		.warn {
+			animation: fade 800ms infinite;
+		}
+	</style>
+	<!-- /css&js -->
+</head>
+
+<body style="background-color: white;">
+	<div class="nav-child">
+		<div style="position: fixed; background-color: white; width: 100%;">
+			<ul class="nav nav-pills">
+				<li class="active print_hidden"><a href="#func-1" data-toggle="tab">统计分析</a></li>
+				<li class="print_hidden"><a href="#func-2" data-toggle="tab">数据导出</a></li>
+
+				<!-- 刷新 -->
+				<div style="float: right;" class="print_hidden">
+					<div class="input-group" style="margin-top: 3px; margin-right: 3px;">
+						<button class="btn btn-default" type="submit" onclick="javascript:location.reload()">刷新</button>
+					</div>
+				</div>
+			</ul>
+			<hr>
+		</div>
+
+		<!-- 子功能页面 -->
+		<div id="myTabContent" class="tab-content" style="margin: auto;">
+			<!-- 统计分析 -->
+			<div class="tab-pane in active" id="func-1" style="padding: 42px 0 0 0;">
+				<div style="padding: 20px;">
+					<!-- 年统计 -->
+					<div class="panel panel-default">
+						<div class="panel-heading">年统计</div>
+						<div class="panel-body">
+							年盈亏比：
+							<div class="progress" style="margin-left: 80px; margin-top: -19px;">
+								<div class="progress">
+									<div class="progress-bar" role="progressbar"
+										style="width: {{ year_data.year_ratio }}%;">{{ year_data.year_ratio }}%</div>
+								</div>
+							</div>
+
+							<div style="width: 33.3%; float: left;">
+								<div class="alert alert-success" role="alert"
+									style="margin-bottom: 0; width: 100%-10px;">
+									年收入：{{ year_data.year_income }}
+								</div>
+							</div>
+
+							<div style="width: 33.3%; float: left;">
+								<div class="alert alert-warning" role="alert"
+									style="margin-left: 10px; margin-bottom: 0; width: 100%-10px;">
+									年支出：{{ year_data.year_expenditure }}
+								</div>
+							</div>
+
+							<div style="width: 33.3%; float: right;">
+								<div class="alert
+								{% if pl.year is False %}
+								    alert-danger warn
+								{% else %}
+									alert-info
+								{% endif %}" role="alert" style="margin-left: 10px; margin-bottom: 0; width: 100%-10px;">
+									年利润：{{ year_data.year_profit }}
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+					<!-- 月统计 -->
+					<div class="panel panel-default">
+						<div class="panel-heading">月统计</div>
+						<div class="panel-body">
+							月盈亏比：
+							<div class="progress" style="margin-left: 80px; margin-top: -19px;">
+								<div class="progress">
+									<div class="progress-bar" role="progressbar"
+										style="width: {{ month_data.month_ratio }}%;">{{ month_data.month_ratio }}%
+									</div>
+								</div>
+							</div>
+
+							<div style="width: 33.3%; float: left;">
+								<div class="alert alert-success" role="alert"
+									style="margin-bottom: 0; width: 100%-10px;">
+									月收入：{{ month_data.month_income }}
+								</div>
+							</div>
+
+							<div style="width: 33.3%; float: left;">
+								<div class="alert alert-warning" role="alert"
+									style="margin-left: 10px; margin-bottom: 0; width: 100%-10px;">
+									月支出：{{ month_data.month_expenditure }}
+								</div>
+							</div>
+
+							<div style="width: 33.3%; float: right;">
+								<div class="alert alert
+								{% if pl.month is False %}
+								    alert-danger warn
+								{% else %}
+								  	alert-info
+								{% endif %}" role="alert"
+									style="margin-left: 10px; margin-bottom: 0; width: 100%-10px;">
+									月利润：{{ month_data.month_profit }}
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+					<div style="width: 50%; float: left;">
+						<div class="panel panel-default" style="margin-right: 10px;  width: 100%-10px;">
+							<div class="panel-heading">年排行</div>
+
+							<table class="table table-bordered table-striped">
+								<thead>
+									<tr>
+										<th>药品名</th>
+										<th>年销售额</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									{% for key,value in medicine_ranking.year_medicine_ranking.items %}
+									<tr>
+										<td style="vertical-align: middle">{{ key }}</td>
+										<td style="vertical-align: middle">{{ value }}</td>
+									</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+					<div style="width: 50%; float: right;">
+						<div class="panel panel-default" style="margin-left: 10px; width: 100%-10px;">
+							<div class="panel-heading">月排行</div>
+
+							<table class="table table-bordered table-striped">
+								<thead>
+									<tr>
+										<th>药品名</th>
+										<th>月销售额</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									{% for key,value in medicine_ranking.month_medicine_ranking.items %}
+									<tr>
+										<td style="vertical-align: middle">{{ key }}</td>
+										<td style="vertical-align: middle">{{ value }}</td>
+									</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- 数据导出 -->
+			<div class="tab-pane" id="func-2" style="padding: 42px 0 0 0;">
+				<!-- 库存数据 -->
+				<div class="panel panel-success" style="margin: 20px;">
+					<div class="panel-heading">库存数据</div>
+					<div class="panel-body"">
+						<img style=" width: 70px; float: left;" src="/static/image/file_icon/CSV.png" alt="CSV">
+						<div class="col-md-11">
+							<div>单击下载库存数据</div>
+							<a href="down_kc" target="_blank"><button style="width: 100px; margin-top: 10px;"
+									type="button" class="btn btn-success">下载</button></a>
+						</div>
+					</div>
+				</div>
+				<!-- 出入库记录 -->
+				<div class="panel panel-success" style="margin: 20px;">
+					<div class="panel-heading">出入库记录</div>
+					<div class="panel-body"">
+						<img style=" width: 70px; float: left;" src="/static/image/file_icon/CSV.png" alt="CSV">
+						<div class="col-md-11">
+							<div>单击下载出入库记录</div>
+							<a href="down_io" target="_blank"><button style="width: 100px; margin-top: 10px;"
+									type="button" class="btn btn-success">下载</button></a>
+						</div>
+					</div>
+				</div>
+				<!-- 客户数据 -->
+				<div class="panel panel-success" style="margin: 20px;">
+					<div class="panel-heading">客户数据</div>
+					<div class="panel-body"">
+						<img style=" width: 70px; float: left;" src="/static/image/file_icon/CSV.png" alt="CSV">
+						<div class="col-md-11">
+							<div>单击下载客户数据</div>
+							<a href="down_kh" target="_blank"><button style="width: 100px; margin-top: 10px;"
+									type="button" class="btn btn-success">下载</button></a>
+						</div>
+					</div>
+				</div>
+				<!-- 供应商数据 -->
+				<div class="panel panel-success" style="margin: 20px;">
+					<div class="panel-heading">供应商数据</div>
+					<div class="panel-body"">
+						<img style=" width: 70px; float: left;" src="/static/image/file_icon/CSV.png" alt="CSV">
+						<div class="col-md-11">
+							<div>单击下载供应商数据</div>
+							<a href="down_gys" target="_blank"><button style="width: 100px; margin-top: 10px;"
+									type="button" class="btn btn-success">下载</button></a>
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+	</div>
+	<!-- /子功能页面 -->
+	</div>
+</body>
+
+</html>

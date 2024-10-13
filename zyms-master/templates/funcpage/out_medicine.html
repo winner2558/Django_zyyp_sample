@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>库存管理</title>
+	<!-- css&js -->
+	<link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="/static/css/style.css" />
+	<link rel="stylesheet" href="/static/css/print.css" media="print" />
+	<script src="/static/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/static/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+	<!-- /css&js -->
+</head>
+
+<body style="background-color: white;">
+	<div class="nav-child">
+		<div style="position: fixed; background-color: white; width: 100%;">
+			<ul class="nav nav-pills">
+				<li class="active"><a data-toggle="tab">药品出库</a></li>
+				<a class="btn btn-default print_hidden" style="margin-top: 3px; float: right; margin-right: 3px;"
+					href="/kcpg" role="button">返回</a>
+			</ul>
+			<hr>
+		</div>
+		<!-- 子功能页面 -->
+		<div id="myTabContent" class="tab-content" style="margin: 0;">
+			<!-- 药品出库 -->
+			<div class="tab-pane in active" id="func-1" style="padding: 42px 0 0 0;">
+				<div class="tab-pane" id="func-2"
+					style="padding: 100px 20px 0 20px; width: 550px; margin: auto; position: absolute; top: 0; left: 0; right: 0; bottom: 0;">
+					<form action="/out_medicine_save" method="POST" onSubmit="return beforeSubmit(this);">
+						{% csrf_token %}
+						<input type="text" value="{{ medicine_data.id }}" name="id" hidden>
+						<label>药品名</label>
+						<input readonly type="text" value="{{ medicine_data.medicine_name }}" class="form-control"
+							name="medicine_name" aria-describedby="helpBlock2">
+						<label>客户</label>
+						<select class="form-control" name="medicine_suppliers" id="">
+							{% for row in customers_suppliers %}
+							<option value="{{ row.cs_unit }}" {% if row.cs_unit == medicine_data.medicine_suppliers %}
+								selected {% endif %}>{{ row.cs_unit }}</option>
+							{% endfor %}
+						</select>
+						<label>品牌</label>
+						<input readonly type="text" value="{{ medicine_data.medicine_trademark }}" class="form-control"
+							name="medicine_trademark" aria-describedby="helpBlock2">
+						<label>生产地址</label>
+						<input readonly type="text" value="{{ medicine_data.medicine_production_address }}"
+							class="form-control" name="medicine_production_address" aria-describedby="helpBlock2">
+						<label>条码号</label>
+						<input readonly type="number" value="{{ medicine_data.medicine_code }}" class="form-control"
+							name="medicine_code" aria-describedby="helpBlock2">
+						<label>规格</label>
+						<input readonly type="text" value="{{ medicine_data.medicine_specification }}"
+							class="form-control" name="medicine_specification" aria-describedby="helpBlock2">
+						<label>进货价</label>
+						<input readonly type="number" value="{{ medicine_data.medicine_purchase }}" step="0.01"
+							class="form-control" name="medicine_purchase" aria-describedby="helpBlock2">
+						<label>出售价</label>
+						<input readonly type="number" value="{{ medicine_data.medicine_selling }}" step="0.01"
+							class="form-control" name="medicine_selling" aria-describedby="helpBlock2">
+						<label>出库数量</label>
+						<input type="number" class="form-control" name="medicine_quantity"
+							oninput="if(value.length>9)value=value.slice(0,9)" aria-describedby="helpBlock2" value="0">
+						<button style="margin-top: 20px; width: 100%;" type="submit"
+							class="btn btn-success">确认出库</button>
+					</form>
+				</div>
+				<!-- /药品出库 -->
+			</div>
+		</div>
+		<!-- /子功能页面 -->
+	</div>
+
+	<!-- 表单验证 -->
+	<script type="text/javascript">
+		function beforeSubmit(form) {
+			var regEn = /[`~!@#$%^&*()_+<>?:"{},.\/;'[\]]/im,
+				regCn = /[·！#￥（——）：；“”‘、，|《。》？、【】[\]]/im;
+			var flag = true;
+			if (form.medicine_name.value == '') {
+				flag = false;
+			}
+			if (form.medicine_suppliers.value == '') {
+				flag = false;
+			}
+			if (form.medicine_trademark.value == '') {
+				flag = false;
+			}
+			if (form.medicine_production_address.value == '') {
+				flag = false;
+			}
+			if (form.medicine_code.value == '') {
+				flag = false;
+			}
+			if (form.medicine_specification.value == '') {
+				flag = false;
+			}
+			if (form.medicine_purchase.value == '') {
+				flag = false;
+			}
+			if (form.medicine_selling.value == '') {
+				flag = false;
+			}
+
+			if (flag == false) {
+				$('#error_text').text('请填写完整相关信息且不能包含特殊字符');
+				$('#context_error').modal('show');
+				return false;
+			}
+
+			return true;
+		}
+	</script>
+
+	<!-- 表单验证提示框 -->
+	<div class="modal fade" id=context_error tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+		<div class="modal-dialog modal-sm" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+							aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">提示</h4>
+				</div>
+				<div class="modal-body">
+					<div class="alert alert-warning" role="alert" style="margin-bottom: 0;">
+						<span id="error_text"></span>
+					</div>
+				</div>
+				<div class="modal-footer" style="margin-top: 0;">
+					<button type="button" class="btn btn-default" data-dismiss="modal">确认</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 表单验证提示框 -->
+</body>
+
+</html>

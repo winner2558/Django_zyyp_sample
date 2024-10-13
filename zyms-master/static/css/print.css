@@ -1,0 +1,14 @@
+@media print {
+    .tab-content{
+        margin: 0;
+    }
+
+    .function-main{
+        padding: 0;
+    }
+
+	.print_hidden{
+		display: none;
+		visibility: hidden;
+    }
+}

@@ -1,0 +1,157 @@
+html, body {
+	height: 100%;
+	padding: 0;
+	margin: 0;
+	background-color: #E8E8E9;
+}
+
+#login-block {
+	width: 800px;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 12%;
+	bottom: 0;
+	margin: auto;
+}
+
+#login-background {
+	width: 600px;
+	border-radius: 20px;
+}
+
+#login-block > div {
+	width: 380px;
+	height: 540px;
+	background-color: white;
+	position: absolute;
+	right: 0;
+	top: -40px;
+	border-radius: 20px;
+	padding-top: 60px;
+	text-align: center;
+}
+
+#login-form {
+	margin: 50px;
+}
+
+.form-group {
+	text-align: left;
+}
+
+hr {
+	border: 2px solid #28E6B4;
+}
+
+.btn-login {
+	transition: 0.2s;
+	margin-top: 50px;
+	height: 40px;
+	width: 180px;
+	background-color: #28E6B4;
+	border-radius: 20px;
+	border: 0;
+	color: white;
+}
+
+.btn-login:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 2px 5px rgba(40, 230, 180, 0.8);
+}
+
+.input-login {
+	height: 40px;
+}
+
+.navbar-user {
+	padding: 20px;
+	padding-right: 50px;
+}
+
+.navbar-function-left {
+	position: fixed;
+	height: 100%;
+	margin-top: -55px;
+	background-color: #324D56;
+	width: 252px;
+}
+
+.navbar-function-left > ul {
+	margin-top: 100px;
+}
+
+.navbar-function-left > ul > li > a {
+	border-radius: 0px;
+	color: white;
+	padding: 20px;
+	padding-left: 50px;
+}
+
+.navbar-function-left > ul > li:last-child {
+	margin-top: 100px;
+}
+
+.navbar-function-left > ul > li > a:hover {
+	background-color: #263A41;
+}
+
+.navbar-function-left > ul > li > a:focus {
+	border-style: solid;
+	border-left: thick solid #28e6b4;
+	border-top: 0px;
+	border-right: 0px;
+	border-bottom: 0px;
+	background-color: #263A41;
+}
+
+.function-main {
+	display: inline-flex;
+	padding-top: 90px;
+	height: 100%;
+	width: 100%;
+}
+
+.tab-content {
+	margin-left: 262px;
+	margin-top: 10px;
+	margin-right: 10px;
+	width: 100%;
+	margin-bottom: 10px;
+	background-color: white;
+}
+
+.nav-child > div > ul > li > a {
+	color: gray;
+	border: 0;
+	border-radius: 0;
+}
+
+.nav-child > div > ul > li.active > a {
+	color: white;
+	border: 0;
+}
+
+
+.nav-child > div > ul > li.active > a:hover {
+	color: white;
+	border: 0;
+}
+
+
+.nav-child > div > ul > li.active > a:focus {
+	color: white;
+	border: 0;
+}
+
+.nav-child > div > hr {
+	margin: 0px;
+	border-color: #999999;
+	border: solid 1px;
+}
+
+iframe {
+	border: 0;
+	height: 100%;
+	width: 100%;
+}

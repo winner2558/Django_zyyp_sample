@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>智宇药品进销存管理系统-管理</title>
+	<link rel="icon" type="image/x-ico" href="/static/image/logo.ico" />
+	<!-- css&js -->
+	<link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="/static/css/style.css" />
+	<link rel="stylesheet" href="/static/css/print.css" media="print" />
+	<script src="/static/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/static/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+	<!-- /css&js -->
+</head>
+
+<body>
+	<!-- 顶部导航栏 -->
+	<nav class="navbar navbar-default navbar-fixed-top print_hidden" role="navigation" style="height: 90px;">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a href="#"><img src="/static/image/图标.png" style="height: 90px;"></a>
+			</div>
+			<div>
+				<ul class="nav navbar-nav navbar-left navbar-user">
+					<li><a href=""><span class="glyphicon glyphicon-user"></span>
+							仓库管理员: {{ admin_user_name }}
+						</a>
+					</li>
+					<li><a href="outlogin"><span class="glyphicon glyphicon-log-in"></span> 退出登录</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right navbar-user" style="padding-top: 28px; padding-bottom: 28px;">
+					<li><button class="btn btn-default" onclick="window.print()"><span
+								class="glyphicon glyphicon-print"></span> 打印</button></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<!-- /顶部导航栏 -->
+
+	<!-- 功能面板 -->
+	<div class="function-main">
+		<!-- 左侧导航栏 -->
+		<nav class="navbar-function-left print_hidden">
+			<ul id="myTab" class="nav nav-pills nav-stacked">
+				<li class="active" style="margin-top: 0;"><a href="#id-1" data-toggle="tab"><span class="glyphicon glyphicon-inbox"></span>
+						库存管理 </a></li>
+			</ul>
+		</nav>
+		<!-- /左侧导航栏 -->
+
+		<!-- 右侧显示窗口 -->
+		<div id="myTabContent" class="tab-content">
+			<!-- 库存管理子页 -->
+			<div class="nav-child tab-pane in active" id="id-1" style="height: 100%;">
+				<iframe src="kcpg"></iframe>
+			</div>
+			<!-- /库存管理子页 -->
+
+		</div>
+		<!-- /右侧显示窗口 -->
+	</div>
+	<!-- /功能面板 -->
+
+</body>
+
+</html>

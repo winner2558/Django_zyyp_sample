@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>系统管理</title>
+    <!-- css&js -->
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css" />
+    <link rel="stylesheet" href="/static/css/print.css" media="print" />
+    <script src="/static/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/static/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+    <!-- /css&js -->
+</head>
+
+<body style="background-color: white;">
+    <div class="nav-child">
+        <div style="position: fixed; background-color: white; width: 100%;">
+            <ul class="nav nav-pills">
+                <li class="active"><a data-toggle="tab">提示</a></li>
+
+                {% if not up == '' %}
+                <a class="btn btn-default print_hidden" style="margin-top: 3px; float: right; margin-right: 3px;"
+                    href="{{ up }}" role="button">返回</a>
+                {% endif %}
+
+            </ul>
+            <hr>
+        </div>
+        <!-- 子功能页面 -->
+        <div id="myTabContent" class="tab-content" style="margin: 0;">
+            <!-- 管理员信息编辑 -->
+            <div class="tab-pane in active" id="func-1" style="padding: 42px 0 0 0;">
+                <div class="tab-pane" id="func-2"
+                    style="padding: 100px 20px 0 20px; width: 550px; margin: auto; position: absolute; top: 0; left: 0; right: 0; bottom: 0;">
+                    <div class="panel panel-warning">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">提示</h3>
+                        </div>
+                        <div class="panel-body">
+                            {{ info }}
+                        </div>
+                    </div>
+
+                    {% if not up == '' %}
+                    <a href="{{ up }}"><button style="margin-top: 20px; width: 100%;" type="submit"
+                            class="btn btn-success">返回</button></a>
+                    {% endif %}
+
+                </div>
+                <!-- /管理员信息编辑 -->
+            </div>
+        </div>
+        <!-- /子功能页面 -->
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>智宇药品进销存管理系统</title>
+	<link rel="icon" type="image/x-ico" href="/static/image/logo.ico" />
+	<link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="/static/css/style.css" />
+	<link rel="stylesheet" href="/static/css/print.css" media="print" />
+	<script src="/static/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/static/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/static/js/md5.min.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body style="background-image: url(/static/image/arches.png)">
+
+	<div id="login-block">
+		<img src="/static/image/登录主图.png" id="login-background">
+
+		<div>
+			<font size="6" color="#28e6b4">登录</font><br />
+
+			<form action="login" method="post" id="login-form" onsubmit="return passwdToMd5()">
+				{% csrf_token %}
+				<hr />
+				<!-- 用户名 -->
+				<div class="form-group">
+					<label for="name">用户名</label>
+					<input type="text" class="form-control input-login" name="username" id="username"
+						placeholder="请输入用户名">
+				</div>
+				<!-- 密码 -->
+				<div class="form-group">
+					<label for="name">密码</label>
+					<input type="password" class="form-control input-login" name="userpass" id="userpass"
+						placeholder="请输入密码">
+				</div>
+				{% if flag == False %}
+				<div style="color: red;">用户名或密码不正确</div>
+				{% endif %}
+				<button type="submit" class="btn-login">登录</button>
+			</form>
+		</div>
+	</div>
+
+	<!-- 密码md5加密 -->
+	<script>
+		function passwdToMd5() {
+			$("#userpass").val(md5($("#userpass").val()))
+		}
+	</script>
+
+</body>
+
+</html>
